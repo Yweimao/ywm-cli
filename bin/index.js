@@ -1,4 +1,13 @@
 #! /usr/bin/env node
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 import { program } from "commander";
 import { createRequire } from "module";
 import { fileURLToPath } from "url";
@@ -18,18 +27,18 @@ program
     .command("create <project-name>")
     .description("create a new project")
     .option("-f, --force", "overwrite target directory if it exist")
-    .action((name, vale) => {
-    console.log(name, vale);
-});
+    .action((name, vale) => __awaiter(void 0, void 0, void 0, function* () {
+    (yield import("./commands/create.js")).default(name, vale);
+}));
 program
     .command("config [value]")
     .description("inspect and modify the config")
     .option("-g, --get <path>", "get value from option")
     .option("-s, --set <path> <value>", "set option value")
     .option("-d, --delete <path>", "delete option from config")
-    .action((name, vale) => {
-    console.log(name, vale);
-});
+    .action((name, vale) => __awaiter(void 0, void 0, void 0, function* () {
+    (yield import("./commands/config.js")).default(name, vale);
+}));
 program.addHelpText("after", `${chalk.blueBright("my-cli <command> --help")} for detailed usage of given command`);
 // 解析用户传递的参数
 program.parse(process.argv); //直接解析用户参数 --help是自带的参数

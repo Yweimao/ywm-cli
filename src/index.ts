@@ -21,8 +21,8 @@ program
   .command("create <project-name>")
   .description("create a new project")
   .option("-f, --force", "overwrite target directory if it exist")
-  .action((name, vale) => {
-    console.log(name, vale);
+  .action(async (name, vale) => {
+    (await import("./commands/create.js")).default(name, vale);
   });
 
 program
@@ -31,8 +31,8 @@ program
   .option("-g, --get <path>", "get value from option")
   .option("-s, --set <path> <value>", "set option value")
   .option("-d, --delete <path>", "delete option from config")
-  .action((name, vale) => {
-    console.log(name, vale);
+  .action(async (name, vale) => {
+    (await import("./commands/config.js")).default(name, vale);
   });
 
 program.addHelpText(
