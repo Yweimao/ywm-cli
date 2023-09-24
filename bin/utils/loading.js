@@ -8,12 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import ora from "ora";
-export const wrapLoading = (message, fn) => __awaiter(void 0, void 0, void 0, function* () {
+import chalk from "chalk";
+export const wrapLoading = (message, fn, successMeaage) => __awaiter(void 0, void 0, void 0, function* () {
     const spinner = ora(message);
     spinner.start();
     try {
         const res = yield fn();
-        spinner.succeed();
+        spinner.succeed(`${chalk.gray.bold(`${successMeaage}`)}`);
         return res;
     }
     catch (error) {

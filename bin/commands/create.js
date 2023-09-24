@@ -11,6 +11,7 @@ import path from "path";
 import inquirer from "inquirer";
 import { existsSync, rmSync } from "fs";
 import { wrapLoading } from "../utils/loading.js";
+import { downloadProject } from "../utils/download.js";
 export default function (name, options) {
     return __awaiter(this, void 0, void 0, function* () {
         // 获取当前的工作目录
@@ -44,5 +45,21 @@ export default function (name, options) {
                 }
             }
         }
+        // 1.拉取项目模板
+        let { projectType } = yield inquirer.prompt([
+            {
+                name: "projectType",
+                type: "list",
+                message: "请选择项目模版",
+                choices: [
+                    { name: "vue2-template", value: "vue2" },
+                    { name: "vue3-template", value: "vue3" },
+                    { name: "react-template", value: "react" },
+                ],
+            },
+        ]);
+        const repoUrl = "https://github.com/Yweimao/vite-flow.git#main";
+        // 下载项目模版
+        yield downloadProject(repoUrl, targetDir, name);
     });
 }

@@ -19,7 +19,7 @@ const __dirname = dirname(__filename);
 const require = createRequire(import.meta.url);
 // 获取package.json中的信息
 const pkg = require(join(__dirname, "../package.json"));
-//输出版本号信息的命令
+//输出版本号信息的命令 <>表示必填 []表示选填
 program.version(`tree-cli@${pkg.version}`).usage("<command> [options]");
 // 1.通过脚手架来创建一个项目 create（拉取仓库的模板）
 // 2.配置拉取的信息，配置系统文件 config
